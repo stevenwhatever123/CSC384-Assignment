@@ -18,6 +18,8 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="CoinTriggerHandler.cs" t="Include" />
+          <e p="EnergizerTrigeerHandler.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
         </e>
       </e>
