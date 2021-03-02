@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9088908632546551185}
   - component: {fileID: 9088908632546551187}
   - component: {fileID: 9088908632546551186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform_Blue_Wide (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 9088908632580450188}
   - component: {fileID: 9088908632580450190}
   - component: {fileID: 9088908632580450189}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform_Blue_Wide (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 9088908633878129516}
   - component: {fileID: 9088908633878129518}
   - component: {fileID: 9088908633878129517}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform_Blue_Wide (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9088908634365139998}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bump_Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

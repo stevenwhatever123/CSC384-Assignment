@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2682241269192965521}
   - component: {fileID: 7842572919192754261}
   - component: {fileID: 3412263896729295690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Energizers
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,7 +9,7 @@ public class CoinTriggerHandler : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player!!!");
             Destroy(gameObject);

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f6882d7-1242-4d02-9bea-5807cf5a3c71" name="Default Changelist" comment="" />
+    <list default="true" id="8f6882d7-1242-4d02-9bea-5807cf5a3c71" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.cs-384-assignment/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.cs-384-assignment/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.cs-384-assignment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.cs-384-assignment/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Coin.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Coin.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Energizers.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Energizers.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CoinTriggerHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CoinTriggerHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,12 +21,15 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnergizerTrigeerHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Teleport.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/CoinTriggerHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/EnergizerTrigeerHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/A-Star/AStarGrid.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CoinTriggerHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Teleport.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1o4AmyZ96pBD6a9t7RE2NKr94AS" />
@@ -64,6 +75,7 @@
       <workItem from="1612535712461" duration="8021000" />
       <workItem from="1613055657878" duration="1198000" />
       <workItem from="1614271025257" duration="1865000" />
+      <workItem from="1614693359631" duration="5525000" />
     </task>
     <servers />
   </component>
@@ -72,6 +84,17 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

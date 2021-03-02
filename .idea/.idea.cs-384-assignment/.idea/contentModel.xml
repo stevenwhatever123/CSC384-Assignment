@@ -18,9 +18,16 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="A-Star" t="Include">
+            <e p="AStarGrid.cs" t="Include" />
+            <e p="AStarHeap.cs" t="Include" />
+            <e p="AStarNode.cs" t="Include" />
+            <e p="AStarPathfinding.cs" t="Include" />
+          </e>
           <e p="CoinTriggerHandler.cs" t="Include" />
           <e p="EnergizerTrigeerHandler.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
+          <e p="Teleport.cs" t="Include" />
         </e>
       </e>
       <e p="cs-384-assignment.sln" t="IncludeFlat" />
