@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.CSC384-Assignment (copy).iml
+# Datasource local storage ignored files
+/../../../../../../../:\Users\steve\CSC384-Assignment (copy)\.idea\.idea.CSC384-Assignment (copy)\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
