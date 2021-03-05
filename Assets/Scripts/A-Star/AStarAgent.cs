@@ -27,20 +27,15 @@ public class AStarAgent : MonoBehaviour
 
     void FollowPath()
     {
-        Vector3 direction = (path[0].worldPosition - transform.position).normalized;
+        Vector3 tempTargetPosition =
+            new Vector3(path[0].worldPosition.x, path[0].worldPosition.y, transform.position.z);
         
-        /*
-        Vector3 newPosition = new Vector3(transform.position.x + direction.x * ( 1 + speed),
-            transform.position.y + direction.y * ( 1 + speed),
-            transform.position.z + direction.z * ( 1 + speed));
-            */
+        //Vector3 direction = (path[0].worldPosition - transform.position).normalized;
+        Vector3 direction = (tempTargetPosition - transform.position).normalized;
         
-        
-        //Vector3 newPosition = transform.position + direction * speed;
-        //rb.MovePosition(newPosition);
-        Vector3 newPosition = new Vector3(path[0].worldPosition.x, path[0].worldPosition.y, transform.position.z);
-        transform.position = Vector3.MoveTowards(transform.position, newPosition, speed);
+        //Debug.Log("Direction: " + direction);
 
-        //rb.MovePosition(path[0].worldPosition);
+        Vector3 newPosition = transform.position + direction * speed;
+        rb.MovePosition(newPosition);
     }
 }
