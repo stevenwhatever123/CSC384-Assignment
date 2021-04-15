@@ -58,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
             }
-            Debug.Log(inputValue);
         }
     }
     

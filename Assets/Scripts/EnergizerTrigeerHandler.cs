@@ -20,6 +20,7 @@ public class EnergizerTrigeerHandler : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             scoreManager.addScore(scoreWorth);
+            playerStateManager.PickUpEnergizer();
             Destroy(gameObject);
         }
     }

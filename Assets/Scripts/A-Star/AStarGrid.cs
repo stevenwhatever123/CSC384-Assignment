@@ -8,8 +8,8 @@ public class AStarGrid : MonoBehaviour
 {
     public bool onlyDisplayPathGizmos;
     
-    public Transform seeker;
-    public Transform target;
+    //public Transform seeker;
+    //public Transform target;
     
     public LayerMask unwalkableMask;
     public LayerMask walkableMask;
@@ -135,8 +135,6 @@ public class AStarGrid : MonoBehaviour
         {
             if (grid != null)
             {
-                AStarNode seekNode = NodeFromWorldPoint(seeker.position);
-                AStarNode targetNode = NodeFromWorldPoint(target.position);
 
                 foreach (AStarNode n in grid)
                 {
@@ -174,17 +172,7 @@ public class AStarGrid : MonoBehaviour
                             }
                             Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
                         }
-                    
-                        if (seekNode == n)
-                        {
-                            Gizmos.color = Color.blue;
-                        }
-                        
-                        if (targetNode == n)
-                        {
-                            Gizmos.color = Color.green;
-                        }
-                        
+
                         Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
                     }
                 }

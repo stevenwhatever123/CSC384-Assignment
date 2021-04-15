@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class AStarPathfinding : MonoBehaviour
 {
-    public Transform seeker, target;
-    
-    
+    //public Transform seeker, target;
+
     private AStarGrid grid;
 
     void Awake()
@@ -50,7 +49,7 @@ public class AStarPathfinding : MonoBehaviour
             if (currentNode == targetNode)
             {
                 sw.Stop();
-                print("Path found: " + sw.ElapsedMilliseconds + " ms");
+                //print("Path found: " + sw.ElapsedMilliseconds + " ms");
                 RetracePath(startNode, targetNode);
                 return;
             }

@@ -1180,8 +1180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43b289b8ec29764a9b1d34b125f012c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeker: {fileID: 1138771733}
-  target: {fileID: 1363368458}
 --- !u!114 &156696579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,8 +1193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlyDisplayPathGizmos: 0
-  seeker: {fileID: 1138771733}
-  target: {fileID: 1363368458}
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 128
@@ -9378,7 +9374,7 @@ GameObject:
   - component: {fileID: 1138771736}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11152,8 +11148,9 @@ GameObject:
   - component: {fileID: 1363368462}
   - component: {fileID: 1363368463}
   - component: {fileID: 1363368460}
+  - component: {fileID: 1363368461}
   m_Layer: 0
-  m_Name: Princess
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11261,6 +11258,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.9
+--- !u!114 &1363368461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363368456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6155a648dfa09904da8113ad2b737d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1363368462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12640,6 +12649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1562872793}
   - component: {fileID: 1562872792}
+  - component: {fileID: 1562872794}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -12674,6 +12684,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1562872794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562872791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a417c6b410f172842957dad47787def9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpTime: 8
 --- !u!4 &1562873292 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6966099034838337182, guid: 79ee57f50b9eaf94a80d64e1a00e184b, type: 3}
