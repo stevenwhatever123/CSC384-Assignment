@@ -105,6 +105,11 @@ public class AStarGrid : MonoBehaviour
         return grid[x, y];
     }
 
+    public AStarNode[,] GetGrid()
+    {
+        return grid;
+    }
+
     public List<AStarNode> path;
 
     private void OnDrawGizmos()

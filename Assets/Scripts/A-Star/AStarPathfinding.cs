@@ -17,7 +17,7 @@ public class AStarPathfinding : MonoBehaviour
 
     void Update()
     {
-        FindPath(seeker.position, target.position);
+        //FindPath(seeker.position, target.position);
     }
 
     public void FindPath(Vector3 startPos, Vector3 targetPos)

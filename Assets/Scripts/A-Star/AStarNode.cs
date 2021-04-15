@@ -17,7 +17,8 @@ public class AStarNode : IHeapItem<AStarNode>
 
     private int heapIndex;
 
-    public AStarNode(bool walkable, Vector3 worldPosition, int gridX, int gridY)
+    public AStarNode(bool walkable, Vector3 worldPosition, 
+        int gridX, int gridY)
     {
         this.walkable = walkable;
         this.worldPosition = worldPosition;

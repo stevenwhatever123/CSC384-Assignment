@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class EnergizerTrigeerHandler : MonoBehaviour
 {
+    [SerializeField] private int scoreWorth = 50;
+
+    public ScoreManager scoreManager;
+    public PlayerStateManager playerStateManager;
+
+    void Awake()
+    {
+        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+        playerStateManager = GameObject.Find("GameManager").GetComponent<PlayerStateManager>();
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player!!!");
+            scoreManager.addScore(scoreWorth);
             Destroy(gameObject);
         }
     }

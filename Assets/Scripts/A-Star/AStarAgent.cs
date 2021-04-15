@@ -15,23 +15,37 @@ public class AStarAgent : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        path[0] = new AStarNode(true, transform.position, 0, 0);
+        path = new List<AStarNode>();
+        path.Add(new AStarNode(true, transform.position, 0, 0));
     }
 
     void Update()
     {
-        pathfinding.FindPath(transform.position, target.position);
+        UpdatePath(target.position);
+        if (Vector2.Distance(transform.position, target.position) <= 1)
+        {
+            Debug.Log("I get you bitch");
+        }
+        else
+        {
+            FollowPath();
+        }
+    }
+    
+    void UpdatePath(Vector3 target){
+        pathfinding.FindPath(transform.position, target);
         path = pathfinding.GetPath();
-        FollowPath();
     }
 
     void FollowPath()
     {
         Vector3 tempTargetPosition =
-            new Vector3(path[0].worldPosition.x, path[0].worldPosition.y, transform.position.z);
+            new Vector3(path[0].worldPosition.x, path[0].worldPosition.y, 
+            transform.position.z);
         
         //Vector3 direction = (path[0].worldPosition - transform.position).normalized;
-        Vector3 direction = (tempTargetPosition - transform.position).normalized;
+        Vector3 direction = (tempTargetPosition - 
+            transform.position).normalized;
         
         //Debug.Log("Direction: " + direction);
 
