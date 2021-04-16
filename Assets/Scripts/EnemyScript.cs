@@ -53,85 +53,19 @@ public class EnemyScript : MonoBehaviour
         switch (aiState)
         {
             case EnemyState.FINDPATH:
-                sizeX = grid.GetGrid().GetUpperBound(0); // Get size of X
-                sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
-
-                destination = grid.GetGrid()[0, 0];
-                do
-                {
-                    int x = Random.Range(0, sizeX);
-                    int y = Random.Range(0, sizeY);
-                    destination = grid.GetGrid()[x, y];
-                } while (!destination.walkable);
-                
-                target = destination.worldPosition;
-                aiState = EnemyState.WANDER;
+                FindPathState();
                 break;
             case EnemyState.WANDER:
-                if (Vector2.Distance(transform.position, target) <= 1)
-                {
-                    aiState = EnemyState.FINDPATH;
-                }
-                else
-                {
-                    UpdatePath(target);
-                    FollowPath();
-                }
+                WanderState();
                 break;
             case EnemyState.SEEKPLAYER:
-                target = player.transform.position;
-
-                if (timer >= chaseTime)
-                {
-                    aiState = EnemyState.FINDPATH;
-                    timer = 0;
-                }
-
-                if (Vector2.Distance(transform.position, target) <= 1)
-                {
-                    timer = 0;
-                    Debug.Log("GG");
-                }
-                else
-                {
-                    UpdatePath(target);
-                    FollowPath();
-                }
+                SeekPlayerState();
                 break;
             case EnemyState.FLEEFROMPLAYER:
-                sizeX = grid.GetGrid().GetUpperBound(0); // Get size of X
-                sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
-
-                destination = grid.GetGrid()[0, 0];
-                do
-                {
-                    int x = Random.Range(0, sizeX);
-                    int y = Random.Range(0, sizeY);
-                    destination = grid.GetGrid()[x, y];
-                    bool farFromPlayer = Vector3.Distance(transform.position, 
-                        destination.worldPosition) <= 10;
-                } while (!destination.walkable);
-                
-                target = destination.worldPosition;
-                aiState = EnemyState.FLEEFROMPLAYERWANDER;
+                FleeFromPlayerState();
                 break;
             case EnemyState.FLEEFROMPLAYERWANDER:
-                
-                if (timer >= chaseTime)
-                {
-                    aiState = EnemyState.FINDPATH;
-                    timer = 0;
-                }
-
-                if (Vector2.Distance(transform.position, target) <= 1)
-                {
-                    aiState = EnemyState.FLEEFROMPLAYER;
-                }
-                else
-                {
-                    UpdatePath(target);
-                    FollowPath();
-                }
+                FleeFromPlayerWanderState();
                 break;
         }
     }
@@ -144,6 +78,96 @@ public class EnemyScript : MonoBehaviour
     public void PlayerBackToNormal()
     {
         aiState = EnemyState.FINDPATH;
+    }
+
+    void FindPathState()
+    {
+        sizeX = grid.GetGrid().GetUpperBound(0); // Get size of X
+        sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
+
+        destination = grid.GetGrid()[0, 0];
+        do
+        {
+            int x = Random.Range(0, sizeX);
+            int y = Random.Range(0, sizeY);
+            destination = grid.GetGrid()[x, y];
+        } while (!destination.walkable);
+                
+        target = destination.worldPosition;
+        aiState = EnemyState.WANDER;
+    }
+
+    void WanderState()
+    {
+        if (Vector2.Distance(transform.position, target) <= 1)
+        {
+            aiState = EnemyState.FINDPATH;
+        }
+        else
+        {
+            UpdatePath(target);
+            FollowPath();
+        }
+    }
+
+    void SeekPlayerState()
+    {
+        target = player.transform.position;
+
+        if (timer >= chaseTime)
+        {
+            aiState = EnemyState.FINDPATH;
+            timer = 0;
+        }
+
+        if (Vector2.Distance(transform.position, target) <= 1)
+        {
+            timer = 0;
+            Debug.Log("GG");
+        }
+        else
+        {
+            UpdatePath(target);
+            FollowPath();
+        }
+    }
+
+    void FleeFromPlayerState()
+    {
+        sizeX = grid.GetGrid().GetUpperBound(0); // Get size of X
+        sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
+
+        destination = grid.GetGrid()[0, 0];
+        do
+        {
+            int x = Random.Range(0, sizeX);
+            int y = Random.Range(0, sizeY);
+            destination = grid.GetGrid()[x, y];
+            bool farFromPlayer = Vector3.Distance(transform.position, 
+                destination.worldPosition) <= 10;
+        } while (!destination.walkable);
+                
+        target = destination.worldPosition;
+        aiState = EnemyState.FLEEFROMPLAYERWANDER;
+    }
+
+    void FleeFromPlayerWanderState()
+    {
+        if (timer >= chaseTime)
+        {
+            aiState = EnemyState.FINDPATH;
+            timer = 0;
+        }
+
+        if (Vector2.Distance(transform.position, target) <= 1)
+        {
+            aiState = EnemyState.FLEEFROMPLAYER;
+        }
+        else
+        {
+            UpdatePath(target);
+            FollowPath();
+        }
     }
     
     void FollowPath()
