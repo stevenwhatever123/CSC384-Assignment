@@ -26,7 +26,11 @@ public class EnemyScript : MonoBehaviour
 
     private float timer;
 
-    private void Start()
+    private int sizeX;
+    private int sizeY;
+    private AStarNode destination;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         path = new List<AStarNode>();
@@ -49,10 +53,10 @@ public class EnemyScript : MonoBehaviour
         switch (aiState)
         {
             case EnemyState.FINDPATH:
-                int sizeX = grid.GetGrid().GetUpperBound(0); // Get size of X
-                int sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
+                sizeX = grid.GetGrid().GetUpperBound(0); // Get size of X
+                sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
 
-                AStarNode destination = grid.GetGrid()[0, 0];
+                destination = grid.GetGrid()[0, 0];
                 do
                 {
                     int x = Random.Range(0, sizeX);
@@ -94,8 +98,52 @@ public class EnemyScript : MonoBehaviour
                     FollowPath();
                 }
                 break;
+            case EnemyState.FLEEFROMPLAYER:
+                sizeX = grid.GetGrid().GetUpperBound(0); // Get size of X
+                sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
+
+                destination = grid.GetGrid()[0, 0];
+                do
+                {
+                    int x = Random.Range(0, sizeX);
+                    int y = Random.Range(0, sizeY);
+                    destination = grid.GetGrid()[x, y];
+                    bool farFromPlayer = Vector3.Distance(transform.position, 
+                        destination.worldPosition) <= 10;
+                } while (!destination.walkable);
                 
+                target = destination.worldPosition;
+                aiState = EnemyState.FLEEFROMPLAYERWANDER;
+                break;
+            case EnemyState.FLEEFROMPLAYERWANDER:
+                
+                if (timer >= chaseTime)
+                {
+                    aiState = EnemyState.FINDPATH;
+                    timer = 0;
+                }
+
+                if (Vector2.Distance(transform.position, target) <= 1)
+                {
+                    aiState = EnemyState.FLEEFROMPLAYER;
+                }
+                else
+                {
+                    UpdatePath(target);
+                    FollowPath();
+                }
+                break;
         }
+    }
+
+    public void PlayerPowerUp()
+    {
+        aiState = EnemyState.FLEEFROMPLAYER;
+    }
+
+    public void PlayerBackToNormal()
+    {
+        aiState = EnemyState.FINDPATH;
     }
     
     void FollowPath()

@@ -10,12 +10,15 @@ public class PlayerStateManager : MonoBehaviour
     private PlayerState playerState = PlayerState.NORMAL;
 
     private PlayerController playerController;
-    
+
+    public GameObject[] allGhosts;
+
     private float timer;
 
-    private void Awake()
+    private void Start()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        allGhosts = GameObject.FindGameObjectsWithTag("Ghost");
     }
 
     // Update is called once per frame
@@ -28,6 +31,15 @@ public class PlayerStateManager : MonoBehaviour
             {
                 playerState = PlayerState.NORMAL;
                 playerController.setInPowerUp(false);
+                
+                foreach (GameObject enemy in allGhosts)
+                {
+                    if (enemy != null)
+                    {
+                        enemy.GetComponent<EnemyScript>().PlayerPowerUp();
+                    }
+                }
+                
                 timer = 0;
                 Debug.Log("End");
             }
@@ -40,6 +52,15 @@ public class PlayerStateManager : MonoBehaviour
         {
             playerState = PlayerState.POWERUP;
             playerController.setInPowerUp(true);
+            
+            foreach (GameObject enemy in allGhosts)
+            {
+                if (enemy != null)
+                {
+                    enemy.GetComponent<EnemyScript>().PlayerPowerUp();
+                }
+            }
+
             Debug.Log("Power Up");
         }
     }

@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
             
             if (inputValue.x < 0)
             {
-                spriteRenderer.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else if(inputValue.x == 0)
             {
@@ -56,7 +56,19 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                spriteRenderer.flipX = true;
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+
+            if (inputValue.y > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 270);
+            } else if (inputValue.y == 0)
+            {
+                //Do nothing
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 90);
             }
         }
     }
