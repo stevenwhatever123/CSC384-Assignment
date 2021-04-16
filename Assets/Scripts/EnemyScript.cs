@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using Random = UnityEngine.Random;
 
 public class EnemyScript : MonoBehaviour
@@ -27,6 +28,8 @@ public class EnemyScript : MonoBehaviour
     public float chaseTime = 20;
 
     public float movementSpeed;
+
+    public int scoreWorth;
 
     private float timer;
 
@@ -245,5 +248,10 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.Log("GG");
         }
+    }
+
+    public int getScore()
+    {
+        return scoreWorth;
     }
 }

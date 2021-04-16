@@ -8,22 +8,28 @@ public class PlayerController : MonoBehaviour
 
     private AgentMovementManager agentMovementManager;
 
+    private ScoreManager scoreManager;
+
     private EnemyScript enemyController;
     
     private GameObject spawnPoint;
 
     private bool InPowerUp = false;
 
+    private int killCounter = 1;
+
     void Start()
     {
         playerStateManager = GameObject.Find("GameManager").GetComponent<PlayerStateManager>();
         agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
+        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
         spawnPoint = GameObject.Find("SpawnPoint");
     }
 
     public void setInPowerUp(bool b)
     {
         InPowerUp = b;
+        killCounter = 1;
     }
 
     public bool IsInPowerUp()
@@ -33,7 +39,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnTriggerEnter2D(Collider2D other)
     {
-
+        
         if (InPowerUp)
         {
             if (other.gameObject.CompareTag("Ghost"))
@@ -42,6 +48,8 @@ public class PlayerController : MonoBehaviour
                 enemyController = other.gameObject.GetComponent<EnemyScript>();
                 if (enemyController.isFleeing())
                 {
+                    scoreManager.addScore(other.gameObject.GetComponent<EnemyScript>().scoreWorth * killCounter);
+                    killCounter++;
                     enemyController.Eaten();
                 }
 

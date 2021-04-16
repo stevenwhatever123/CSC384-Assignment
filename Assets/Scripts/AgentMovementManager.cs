@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AgentMovementManager : MonoBehaviour
 {
-    private bool allowToMove = true;
+    public bool allowToMove = true;
 
     public void setAllowToMove(bool b)
     {

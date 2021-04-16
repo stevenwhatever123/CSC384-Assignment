@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private AgentMovementManager agentMovementManager;
+
     public float moveDirectionX = -1f;
     public float moveDirectionY = 0f;
 
@@ -19,11 +21,15 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
     }
 
     void Update()
     {
-        Move();
+        if (agentMovementManager.IsAllowedToMove())
+        {
+            Move();
+        }
     }
 
     public void Move()
