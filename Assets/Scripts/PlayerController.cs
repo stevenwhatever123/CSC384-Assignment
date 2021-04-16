@@ -6,11 +6,19 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerStateManager playerStateManager;
 
+    private AgentMovementManager agentMovementManager;
+
+    private EnemyScript enemyController;
+    
+    private GameObject spawnPoint;
+
     private bool InPowerUp = false;
 
     void Start()
     {
         playerStateManager = GameObject.Find("GameManager").GetComponent<PlayerStateManager>();
+        agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
+        spawnPoint = GameObject.Find("SpawnPoint");
     }
 
     public void setInPowerUp(bool b)
@@ -30,7 +38,16 @@ public class PlayerController : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Ghost"))
             {
-                Destroy(other.gameObject);
+                //other.gameObject.transform.position = spawnPoint.transform.position;
+                enemyController = other.gameObject.GetComponent<EnemyScript>();
+                if (enemyController.isFleeing())
+                {
+                    enemyController.Eaten();
+                }
+
+                agentMovementManager.setAllowToMove(false);
+
+                //Destroy(other.gameObject);
             }
         }
     }

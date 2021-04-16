@@ -63,7 +63,16 @@ public class AStarGrid : MonoBehaviour
         {
             for (int y = -1; y <= 1; y++)
             {
+                int xAbs = Math.Abs(x);
+                int yAbs = Math.Abs(y);
+                /*
                 if (x == 0 && y == 0)
+                {
+                    continue;
+                }
+                */
+                
+                if (xAbs == yAbs)
                 {
                     continue;
                 }

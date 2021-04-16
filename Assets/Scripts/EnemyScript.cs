@@ -8,6 +8,10 @@ public class EnemyScript : MonoBehaviour
 {
     private EnemyState aiState = EnemyState.FINDPATH;
     private Rigidbody2D rb;
+    private AgentMovementManager agentMovementManager;
+    private GameObject spawnPoint;
+    public Collider2D colliderToDisable;
+    
     private Vector3 target;
 
     public AStarGrid grid;
@@ -30,9 +34,13 @@ public class EnemyScript : MonoBehaviour
     private int sizeY;
     private AStarNode destination;
 
+    private bool flee = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
+        spawnPoint = GameObject.Find("SpawnPoint");
         path = new List<AStarNode>();
         path.Add(new AStarNode(true, transform.position, 0, 0));
     }
@@ -67,17 +75,22 @@ public class EnemyScript : MonoBehaviour
             case EnemyState.FLEEFROMPLAYERWANDER:
                 FleeFromPlayerWanderState();
                 break;
+            case EnemyState.RETURNTOBASE:
+                ReturnToBaseState();
+                break;
         }
     }
 
     public void PlayerPowerUp()
     {
         aiState = EnemyState.FLEEFROMPLAYER;
+        flee = true;
     }
 
     public void PlayerBackToNormal()
     {
         aiState = EnemyState.FINDPATH;
+        flee = false;
     }
 
     void FindPathState()
@@ -106,7 +119,7 @@ public class EnemyScript : MonoBehaviour
         else
         {
             UpdatePath(target);
-            FollowPath();
+            FollowPath(movementSpeed);
         }
     }
 
@@ -128,7 +141,7 @@ public class EnemyScript : MonoBehaviour
         else
         {
             UpdatePath(target);
-            FollowPath();
+            FollowPath(movementSpeed);
         }
     }
 
@@ -138,14 +151,15 @@ public class EnemyScript : MonoBehaviour
         sizeY = grid.GetGrid().GetUpperBound(1); // Get size of Y
 
         destination = grid.GetGrid()[0, 0];
+        bool farFromPlayer = false;
         do
         {
             int x = Random.Range(0, sizeX);
             int y = Random.Range(0, sizeY);
             destination = grid.GetGrid()[x, y];
-            bool farFromPlayer = Vector3.Distance(transform.position, 
-                destination.worldPosition) <= 10;
-        } while (!destination.walkable);
+            farFromPlayer = Vector3.Distance(transform.position, 
+                destination.worldPosition) >= 10;
+        } while (!destination.walkable && farFromPlayer);
                 
         target = destination.worldPosition;
         aiState = EnemyState.FLEEFROMPLAYERWANDER;
@@ -166,11 +180,44 @@ public class EnemyScript : MonoBehaviour
         else
         {
             UpdatePath(target);
-            FollowPath();
+            FollowPath(movementSpeed);
         }
     }
+
+    void ReturnToBaseState()
+    {
+        if (!agentMovementManager.IsAllowedToMove())
+        {
+            target = spawnPoint.transform.position;
+            colliderToDisable.enabled = false;
+
+            if (Vector2.Distance(transform.position, target) <= 1)
+            {
+                colliderToDisable.enabled = true;
+                aiState = EnemyState.FINDPATH;
+                agentMovementManager.setAllowToMove(true);
+            }
+            else
+            {
+                UpdatePath(target);
+                FollowPath(movementSpeed * 3);
+            }
+            
+        }
+    }
+
+    public void Eaten()
+    {
+        aiState = EnemyState.RETURNTOBASE;
+        flee = false;
+    }
+
+    public bool isFleeing()
+    {
+        return flee;
+    }
     
-    void FollowPath()
+    void FollowPath(float movementSpeed)
     {
         Vector3 tempTargetPosition =
             new Vector3(path[0].worldPosition.x, path[0].worldPosition.y, 
@@ -190,5 +237,13 @@ public class EnemyScript : MonoBehaviour
     {
         pathfinding.FindPath(transform.position, target);
         path = pathfinding.GetPath();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("GG");
+        }
     }
 }
