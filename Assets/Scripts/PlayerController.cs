@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private ScoreManager scoreManager;
 
     private EnemyScript enemyController;
+
+    private GameObject[] allGhost;
     
     private GameObject spawnPoint;
 
@@ -18,12 +20,16 @@ public class PlayerController : MonoBehaviour
 
     private int killCounter = 1;
 
+    private Vector3 playerSpawnPoint;
+
     void Start()
     {
         playerStateManager = GameObject.Find("GameManager").GetComponent<PlayerStateManager>();
         agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
         scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
         spawnPoint = GameObject.Find("SpawnPoint");
+        playerSpawnPoint = transform.position;
+        allGhost = GameObject.FindGameObjectsWithTag("Ghost");
     }
 
     public void setInPowerUp(bool b)
@@ -52,11 +58,15 @@ public class PlayerController : MonoBehaviour
                     killCounter++;
                     enemyController.Eaten();
                 }
-
                 agentMovementManager.setAllowToMove(false);
 
                 //Destroy(other.gameObject);
             }
         }
+    }
+
+    public Vector3 getPlayerSpawnPoint()
+    {
+        return playerSpawnPoint;
     }
 }

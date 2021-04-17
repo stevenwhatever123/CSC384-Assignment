@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -42,42 +43,43 @@ public class PlayerMovement : MonoBehaviour
     
     public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 inputValue = context.ReadValue<Vector2>();
-
-        if (inputValue.x != 0 || inputValue.y != 0)
+        if (agentMovementManager.IsAllowedToMove())
         {
-            moveDirectionX = 0f;
-            moveDirectionY = 0f;
-        
-            moveDirectionX = inputValue.x;
-            moveDirectionY = inputValue.y;
-            
-            if (inputValue.x < 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if(inputValue.x == 0)
-            {
-                //Do nothing
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 180);
-            }
+            Vector2 inputValue = context.ReadValue<Vector2>();
 
-            if (inputValue.y > 0)
+            if (inputValue.x != 0 || inputValue.y != 0)
             {
-                transform.rotation = Quaternion.Euler(0, 0, 270);
-            } else if (inputValue.y == 0)
-            {
-                //Do nothing
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 90);
+                moveDirectionX = 0f;
+                moveDirectionY = 0f;
+        
+                moveDirectionX = inputValue.x;
+                moveDirectionY = inputValue.y;
+            
+                if (inputValue.x < 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else if(inputValue.x == 0)
+                {
+                    //Do nothing
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 180);
+                }
+
+                if (inputValue.y > 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 270);
+                } else if (inputValue.y == 0)
+                {
+                    //Do nothing
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 90);
+                }
             }
         }
     }
-    
-    
 }

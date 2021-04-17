@@ -4,6 +4,7 @@ using UnityEngine;
 
 enum EnemyState
 {
+    WAITING,
     FINDPATH,
     WANDER,
     WANDERAROUNDMAZE,

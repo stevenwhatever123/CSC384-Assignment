@@ -5,5 +5,6 @@ using UnityEngine;
 enum PlayerState
 {
     NORMAL,
-    POWERUP
+    POWERUP,
+    DEAD
 }

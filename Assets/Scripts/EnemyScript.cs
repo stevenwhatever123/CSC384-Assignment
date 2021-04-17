@@ -11,7 +11,11 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private AgentMovementManager agentMovementManager;
     private GameObject spawnPoint;
+    private PlayerStateManager playerStateManager;
+    private GameObject[] allGhost;
     public Collider2D colliderToDisable;
+
+    private Vector3 ghostSpawnPoint;
     
     private Vector3 target;
 
@@ -31,56 +35,85 @@ public class EnemyScript : MonoBehaviour
 
     public int scoreWorth;
 
+    public int timeToSpawn;
+
     private float timer;
+
+    private float spawnTimer = 0;
 
     private int sizeX;
     private int sizeY;
     private AStarNode destination;
 
-    private bool flee = false;
+    public bool flee = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
         spawnPoint = GameObject.Find("SpawnPoint");
+        playerStateManager = GameObject.Find("GameManager").GetComponent<PlayerStateManager>();
         path = new List<AStarNode>();
         path.Add(new AStarNode(true, transform.position, 0, 0));
+        ghostSpawnPoint = transform.position;
+        allGhost = GameObject.FindGameObjectsWithTag("Ghost");
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= scatterTime && aiState != EnemyState.SEEKPLAYER)
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= timeToSpawn)
         {
-            aiState = EnemyState.SEEKPLAYER;
-            timer = 0;
+            timer += Time.deltaTime;
+            if ((timer >= scatterTime && aiState != EnemyState.SEEKPLAYER) && agentMovementManager.IsAllowedToMove())
+            {
+                aiState = EnemyState.SEEKPLAYER;
+                timer = 0;
+            }
+            Tick();
         }
-        Tick();
     }
 
     void Tick()
     {
-        switch (aiState)
+        if (!playerStateManager.IsDead())
         {
-            case EnemyState.FINDPATH:
-                FindPathState();
-                break;
-            case EnemyState.WANDER:
-                WanderState();
-                break;
-            case EnemyState.SEEKPLAYER:
-                SeekPlayerState();
-                break;
-            case EnemyState.FLEEFROMPLAYER:
-                FleeFromPlayerState();
-                break;
-            case EnemyState.FLEEFROMPLAYERWANDER:
-                FleeFromPlayerWanderState();
-                break;
-            case EnemyState.RETURNTOBASE:
-                ReturnToBaseState();
-                break;
+            switch (aiState)
+            {
+                case EnemyState.FINDPATH:
+                    if (agentMovementManager.IsAllowedToMove())
+                    {
+                        FindPathState();  
+                    }
+                    break;
+                case EnemyState.WANDER:
+                    if (agentMovementManager.IsAllowedToMove())
+                    {
+                        WanderState();
+                    }
+                    break;
+                case EnemyState.SEEKPLAYER:
+                    if (agentMovementManager.IsAllowedToMove())
+                    {
+                        SeekPlayerState();
+                    }
+                    break;
+                case EnemyState.FLEEFROMPLAYER:
+                    if (agentMovementManager.IsAllowedToMove())
+                    {
+                        FleeFromPlayerState();
+                    }
+                    break;
+                case EnemyState.FLEEFROMPLAYERWANDER:
+                    if (agentMovementManager.IsAllowedToMove())
+                    {
+                        FleeFromPlayerWanderState();
+                    }
+                    break;
+                case EnemyState.RETURNTOBASE:
+                    ReturnToBaseState();
+                    break;
+            }
         }
     }
 
@@ -191,17 +224,33 @@ public class EnemyScript : MonoBehaviour
     {
         if (!agentMovementManager.IsAllowedToMove())
         {
-            target = spawnPoint.transform.position;
+            if (timeToSpawn > 0)
+            {
+                target = ghostSpawnPoint;
+            }
+            else
+            {
+                target = spawnPoint.transform.position;
+            }
             colliderToDisable.enabled = false;
 
             if (Vector2.Distance(transform.position, target) <= 1)
             {
                 colliderToDisable.enabled = true;
+                foreach (GameObject friend in allGhost)
+                {
+                    friend.GetComponent<Collider2D>().enabled = true;
+                }
                 aiState = EnemyState.FINDPATH;
                 agentMovementManager.setAllowToMove(true);
             }
             else
             {
+                foreach (GameObject friend in allGhost)
+                {
+                    friend.GetComponent<Collider2D>().enabled = false;
+                }
+                
                 UpdatePath(target);
                 FollowPath(movementSpeed * 3);
             }
@@ -213,6 +262,11 @@ public class EnemyScript : MonoBehaviour
     {
         aiState = EnemyState.RETURNTOBASE;
         flee = false;
+    }
+
+    public void FriendEaten()
+    {
+        spawnTimer = 0;
     }
 
     public bool isFleeing()
@@ -244,14 +298,39 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && (!playerStateManager.IsPowerUp() || !flee))
         {
             Debug.Log("GG");
+            playerStateManager.Dead();
+            
+            foreach (GameObject friend in allGhost)
+            {
+                if (friend.GetInstanceID() == this.GetInstanceID())
+                {
+                    continue;
+                }
+                friend.GetComponent<EnemyScript>().FriendEaten();
+            }
+        }
+
+        if (other.gameObject.CompareTag("Ghost") && aiState != EnemyState.RETURNTOBASE)
+        {
+            aiState = EnemyState.FINDPATH;
         }
     }
 
     public int getScore()
     {
         return scoreWorth;
+    }
+
+    public Vector3 getGhostSpawnPoint()
+    {
+        return ghostSpawnPoint;
+    }
+
+    public void SetStateToFindPath()
+    {
+        aiState = EnemyState.FINDPATH;
     }
 }
