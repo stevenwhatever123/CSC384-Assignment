@@ -65,7 +65,7 @@ public class PlayerStateManager : MonoBehaviour
                 {
                     if (enemy != null)
                     {
-                        enemy.GetComponent<EnemyScript>().PlayerPowerUp();
+                        enemy.GetComponent<EnemyScript>().PlayerBackToNormal();
                     }
                 }
                 

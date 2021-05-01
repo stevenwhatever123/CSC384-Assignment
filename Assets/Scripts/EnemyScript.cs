@@ -12,6 +12,7 @@ public class EnemyScript : MonoBehaviour
     private AgentMovementManager agentMovementManager;
     private GameObject spawnPoint;
     private PlayerStateManager playerStateManager;
+    private SpriteRenderer spriteRenderer;
     private GameObject[] allGhost;
     public Collider2D colliderToDisable;
 
@@ -53,6 +54,7 @@ public class EnemyScript : MonoBehaviour
         agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
         spawnPoint = GameObject.Find("SpawnPoint");
         playerStateManager = GameObject.Find("GameManager").GetComponent<PlayerStateManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         path = new List<AStarNode>();
         path.Add(new AStarNode(true, transform.position, 0, 0));
         ghostSpawnPoint = transform.position;
@@ -120,12 +122,16 @@ public class EnemyScript : MonoBehaviour
     public void PlayerPowerUp()
     {
         aiState = EnemyState.FLEEFROMPLAYER;
+        timer = 0;
+        spriteRenderer.color = new Color(1, 0, 0, 1);
         flee = true;
     }
 
     public void PlayerBackToNormal()
     {
         aiState = EnemyState.FINDPATH;
+        timer = 0;
+        spriteRenderer.color = new Color(1, 1, 1, 1);
         flee = false;
     }
 
@@ -203,8 +209,10 @@ public class EnemyScript : MonoBehaviour
 
     void FleeFromPlayerWanderState()
     {
+        //spriteRenderer.color = new Color(1, 0, 0, 1);
         if (timer >= chaseTime)
         {
+            spriteRenderer.color = new Color(1, 1, 1, 1);
             aiState = EnemyState.FINDPATH;
             timer = 0;
         }
@@ -222,6 +230,7 @@ public class EnemyScript : MonoBehaviour
 
     void ReturnToBaseState()
     {
+        spriteRenderer.color = new Color(1, 1, 1, 1);
         if (!agentMovementManager.IsAllowedToMove())
         {
             if (timeToSpawn > 0)
