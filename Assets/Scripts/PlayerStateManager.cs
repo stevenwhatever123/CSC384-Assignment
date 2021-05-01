@@ -21,8 +21,10 @@ public class PlayerStateManager : MonoBehaviour
     public GameObject[] allGhosts;
 
     public GameObject gameOverText;
+    
+    public static int numberOfLifes = 0;
 
-    public int numberOfLifes = 3;
+    [SerializeField] public int numberOfLifesHelper = 3;
 
     public int deadTime = 2;
 
@@ -34,13 +36,18 @@ public class PlayerStateManager : MonoBehaviour
 
     private float spawnTimer;
 
-    private void Start()
+    private void Awake()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         agentMovementManager = GameObject.Find("GameManager").GetComponent<AgentMovementManager>();
         lifeManager = GameObject.Find("GameManager").GetComponent<LifeManager>();
         playerObject = GameObject.Find("Player");
         allGhosts = GameObject.FindGameObjectsWithTag("Ghost");
+
+        if (numberOfLifes == 0)
+        {
+            numberOfLifes = numberOfLifesHelper;
+        }
     }
 
     // Update is called once per frame
@@ -132,5 +139,10 @@ public class PlayerStateManager : MonoBehaviour
     public bool IsDead()
     {
         return playerState == PlayerState.DEAD;
+    }
+
+    public int GetNumberOfLife()
+    {
+        return numberOfLifes;
     }
 }

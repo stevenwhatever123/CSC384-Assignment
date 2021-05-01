@@ -162,8 +162,8 @@ public class EnemyScript : MonoBehaviour
     void SeekPlayerState()
     {
         target = player.transform.position;
-
-        if (timer >= chaseTime)
+        
+        if (timer >= chaseTime && chaseTime != 0)
         {
             aiState = EnemyState.FINDPATH;
             timer = 0;

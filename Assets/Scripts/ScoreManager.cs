@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreToDisplay;
     
-    private int score = 0;
+    private static int score = 0;
     
     void Start()
     {

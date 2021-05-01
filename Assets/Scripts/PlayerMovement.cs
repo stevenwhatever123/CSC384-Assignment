@@ -49,9 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (inputValue.x != 0 || inputValue.y != 0)
             {
-                moveDirectionX = 0f;
-                moveDirectionY = 0f;
-        
                 moveDirectionX = inputValue.x;
                 moveDirectionY = inputValue.y;
             
@@ -59,25 +56,17 @@ public class PlayerMovement : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
-                else if(inputValue.x == 0)
-                {
-                    //Do nothing
-                }
-                else
+                else if(inputValue.x > 0)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 180);
                 }
 
-                if (inputValue.y > 0)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 270);
-                } else if (inputValue.y == 0)
-                {
-                    //Do nothing
-                }
-                else
+                if (inputValue.y < 0)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 90);
+                } else if (inputValue.y > 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 270);
                 }
             }
         }
