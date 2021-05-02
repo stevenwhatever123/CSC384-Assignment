@@ -145,4 +145,14 @@ public class PlayerStateManager : MonoBehaviour
     {
         return numberOfLifes;
     }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this, playerController.gameObject.transform.position);
+    }
+
+    public void LoadPlayer()
+    {
+        //PlayerInformation data = SaveSystem.LoadPlayer();
+    }
 }

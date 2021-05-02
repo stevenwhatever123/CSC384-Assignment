@@ -21,9 +21,10 @@ public class CoinManager : MonoBehaviour
         UpdateCollectablesCount();
         if (numOfCollectables == 0)
         {
+            LevelManager.levelUp();
             SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         }
-        Debug.Log("Count: " + numOfCollectables);
+        //Debug.Log("Count: " + numOfCollectables);
     }
 
     void UpdateCollectablesCount()

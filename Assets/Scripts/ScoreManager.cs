@@ -9,10 +9,12 @@ public class ScoreManager : MonoBehaviour
     
     private static int score = 0;
     
+    private static int scoreBeforePlaying = 0;
+
     void Start()
     {
         scoreToDisplay = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
-        
+        scoreBeforePlaying = score;
         //scoreToDisplay.text = getScore().ToString();
     }
 
@@ -26,8 +28,13 @@ public class ScoreManager : MonoBehaviour
         score += value;
     }
 
-    public int getScore()
+    public static int getScore()
     {
         return score;
+    }
+
+    public static int getScoreBeforePlay()
+    {
+        return scoreBeforePlaying;
     }
 }
