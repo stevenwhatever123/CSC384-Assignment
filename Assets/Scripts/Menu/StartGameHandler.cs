@@ -15,6 +15,8 @@ public class StartGameHandler : MonoBehaviour
     public TMP_InputField inputField;
     
     public TMP_Text text;
+
+    public TMP_Text alertText;
     
     void Update()
     {
@@ -23,9 +25,16 @@ public class StartGameHandler : MonoBehaviour
     
     public void StartGame()
     {
-        playerData.SetName(inputField.text);
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
-        Debug.Log("Start Game");
+        if (inputField.text != "")
+        {
+            alertText.color = new Color(1, 0, 0, 0);
+            alertText.enabled = false;
+            playerData.SetName(inputField.text);
+            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+            Debug.Log("Start Game");
+        }
+
+        alertText.color = new Color(1, 0, 0, 1);
     }
 
     public void Color()
