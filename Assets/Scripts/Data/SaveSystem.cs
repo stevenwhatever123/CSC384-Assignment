@@ -22,7 +22,8 @@ public static class SaveSystem
 
     public static PlayerInformation LoadPlayer(string name)
     {
-        string path = Application.persistentDataPath + "/" + name + ".txt";
+        //string path = Application.persistentDataPath + "/" + name + ".txt";
+        string path = name;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
