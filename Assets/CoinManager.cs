@@ -7,7 +7,11 @@ public class CoinManager : MonoBehaviour
 {
     public GameObject collectables;
 
+    public PlayerStateManager player;
+
     private int numOfCollectables;
+
+    public static bool inReplayMode = false;
     
     // Start is called before the first frame update
     void Start()
@@ -21,8 +25,14 @@ public class CoinManager : MonoBehaviour
         UpdateCollectablesCount();
         if (numOfCollectables == 0)
         {
-            LevelManager.levelUp();
-            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+            if (!inReplayMode)
+            {
+                LevelManager.levelUp();
+                SaveSystem.SaveReplay(player, ScoreManager.getScore());
+                SaveSystem.SavePlayer(player, ScoreManager.getScore());
+                inReplayMode = true;
+                SceneManager.LoadScene("ReplayScene", LoadSceneMode.Single);
+            }
         }
         //Debug.Log("Count: " + numOfCollectables);
     }

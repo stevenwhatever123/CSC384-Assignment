@@ -24,6 +24,8 @@ public class PlayerStateManager : MonoBehaviour
     
     public static int numberOfLifes = 0;
 
+    public static int numberOfLifesBefore = 0;
+
     [SerializeField] public int numberOfLifesHelper = 3;
 
     public int deadTime = 2;
@@ -47,6 +49,7 @@ public class PlayerStateManager : MonoBehaviour
         if (numberOfLifes == 0)
         {
             numberOfLifes = numberOfLifesHelper;
+            numberOfLifesBefore = numberOfLifes;
         }
     }
 
@@ -144,15 +147,5 @@ public class PlayerStateManager : MonoBehaviour
     public int GetNumberOfLife()
     {
         return numberOfLifes;
-    }
-
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this, playerController.gameObject.transform.position);
-    }
-
-    public void LoadPlayer()
-    {
-        //PlayerInformation data = SaveSystem.LoadPlayer();
     }
 }

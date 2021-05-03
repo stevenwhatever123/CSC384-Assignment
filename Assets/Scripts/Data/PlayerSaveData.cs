@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +29,7 @@ public class PlayerSaveData : MonoBehaviour
 
     public void OnClick()
     {
-        StartCoroutine(Transition());
+        StartCoroutine(TransitionToLoadGame());
     }
 
     public void LoadGame()
@@ -39,11 +40,47 @@ public class PlayerSaveData : MonoBehaviour
         PlayerStateManager.numberOfLifes = data.life;
     }
     
-    IEnumerator Transition()
+    IEnumerator TransitionToLoadGame()
     {
         animator.SetTrigger("Play");
         yield return new WaitForSeconds(transitionTime);
         LoadGame();
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+    }
+    
+    void PlayReplay()
+    {
+        string path = Application.persistentDataPath + "/Replay/" + data.name + ".txt";
+        if (File.Exists(path))
+        {
+            PlayerInformation record = SaveSystem.LoadReplay(path);
+            
+            ReplaySave.record = record.record;
+            ReplayManager.playerReplayRecords = record.record;
+            ReplayManager.enemyZeroRecords = record.enemyZeroRecord;
+            PlayerStateManager.numberOfLifes = record.life;
+            PlayerData.name = data.name;
+            ScoreManager.setScore(record.scoreBeforePlay);
+            LevelManager.setCurrentLevel(data.level-1);
+                
+            StartCoroutine(TransitionToReplay());
+            //SceneManager.LoadScene("ReplayScene", LoadSceneMode.Single);
+        }
+        else
+        {
+            Debug.Log("Replay does not exist");
+        }
+    }
+
+    public void OnClickLeaderBoard()
+    {
+        PlayReplay();
+    }
+
+    IEnumerator TransitionToReplay()
+    {
+        animator.SetTrigger("Play");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene("ReplayScene", LoadSceneMode.Single);
     }
 }

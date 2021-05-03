@@ -48,6 +48,8 @@ public class EnemyScript : MonoBehaviour
 
     public bool flee = false;
 
+    public bool inReplay = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,16 +65,19 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= timeToSpawn)
+        if (!inReplay)
         {
-            timer += Time.deltaTime;
-            if ((timer >= scatterTime && aiState != EnemyState.SEEKPLAYER) && agentMovementManager.IsAllowedToMove())
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer >= timeToSpawn)
             {
-                aiState = EnemyState.SEEKPLAYER;
-                timer = 0;
+                timer += Time.deltaTime;
+                if ((timer >= scatterTime && aiState != EnemyState.SEEKPLAYER) && agentMovementManager.IsAllowedToMove())
+                {
+                    aiState = EnemyState.SEEKPLAYER;
+                    timer = 0;
+                }
+                Tick();
             }
-            Tick();
         }
     }
 

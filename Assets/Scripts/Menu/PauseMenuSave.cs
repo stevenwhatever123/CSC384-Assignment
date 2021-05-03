@@ -31,6 +31,6 @@ public class PauseMenuSave : MonoBehaviour
 
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(player, playerPosition.position);
+        SaveSystem.SavePlayer(player, ScoreManager.getScoreBeforePlay());
     }
 }

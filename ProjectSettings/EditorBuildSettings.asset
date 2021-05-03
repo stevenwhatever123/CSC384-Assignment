@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LeaderboardScene.unity
     guid: 27e36ebfa9235ca4cad24abf43cbfdbb
+  - enabled: 1
+    path: Assets/Scenes/ReplayScene.unity
+    guid: 5115f351b7347864b9b593031597c1a5
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 382fac54217b062409dc4807ca7f8117, type: 2}
