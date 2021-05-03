@@ -1030,10 +1030,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 976672947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb3696f72c952f4dbda6a4f56eece1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 02b9a1a76dcbdee4db98e24c3e5c1e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 658145677}
+  transitionTime: 1
 --- !u!114 &976672950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,8 +1080,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 976672949}
-        m_TargetAssemblyTypeName: QuitGameHandler, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_TargetAssemblyTypeName: LeaderboardButtonHandler, Assembly-CSharp
+        m_MethodName: Leaderboard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1635,3 +1636,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 739154126}
+  transitionTime: 1

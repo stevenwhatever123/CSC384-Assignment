@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,7 +13,14 @@ public class LeaderBoardData : MonoBehaviour
 
     public EventSystem eventSystem;
 
-    private int counter = 0;
+    public int numberOfPlayerToDisplay;
+
+    private List<PlayerInformation> arr;
+
+    private void Awake()
+    {
+        arr = new List<PlayerInformation>();
+    }
 
     void Start()
     {
@@ -23,52 +32,44 @@ public class LeaderBoardData : MonoBehaviour
         string path = Application.persistentDataPath;
         foreach (string file in Directory.EnumerateFiles(path, "*.txt"))
         {
-            printdData(file);
+            //printdData(file);
             //Debug.Log(file);
-            counter++;
+            arr.Add(readData(file));
         }
+        
+        ReOrder();
+
+        for (int i = 0; i < numberOfPlayerToDisplay; i++)
+        {
+            printdData(arr[i]);
+        }
+        
+        /*
+        foreach (PlayerInformation data in arr)
+        {
+            printdData(data);
+        }
+        */
     }
 
-    void printdData(string name)
+    void printdData(PlayerInformation data)
     {
-        PlayerInformation data = readData(name);
-
-        GameObject buttonObject = new GameObject("Button");
-        CanvasRenderer canvasRenderer = buttonObject.AddComponent<CanvasRenderer>();
-        Image image = buttonObject.AddComponent<Image>();
-        Button button = buttonObject.AddComponent<Button>();
-        buttonObject.transform.parent = panel.transform;
-
-        VerticalLayoutGroup layout = buttonObject.AddComponent<VerticalLayoutGroup>();
-        layout.childControlWidth = true;
-        layout.childControlHeight = true;
-
-        layout.childForceExpandHeight = true;
-        layout.childForceExpandWidth = true;
-
-        ColorBlock cb = button.colors;
-        cb.selectedColor = Color.yellow;
-        button.colors = cb;
-        PlayerSaveData saveFile = buttonObject.AddComponent<PlayerSaveData>();
-        saveFile.AddData(data);
-
-        button.onClick.AddListener(saveFile.OnClick);
-
         GameObject textObject = new GameObject("Text");
-        textObject.transform.parent = buttonObject.transform;
+        textObject.transform.parent = panel.transform;
         Text text = textObject.AddComponent<Text>();
 
-        text.text = data.ToString();
+        text.text = data.name + "\n" + "Score: " + data.score;
         text.color = Color.black;
-        
+
         Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
         text.font = ArialFont;
         text.material = ArialFont.material;
+        text.alignment = TextAnchor.MiddleCenter;
+    }
 
-        if (counter == 0)
-        {
-            eventSystem.firstSelectedGameObject = buttonObject;
-        }
+    void ReOrder()
+    {
+        arr = arr.OrderByDescending(o => o.score).ToList();
     }
 
     public PlayerInformation readData(string file)
