@@ -58,6 +58,10 @@ public class PlayerSaveData : MonoBehaviour
             ReplaySave.record = record.record;
             ReplayManager.playerReplayRecords = record.record;
             ReplayManager.enemyZeroRecords = record.enemyZeroRecord;
+            ReplayManager.enemyOneRecords = record.enemyOneRecord;
+            ReplayManager.enemyTwoRecords = record.enemyTwoRecord;
+            ReplayManager.enemyThreeRecords = record.enemyThreeRecord;
+
             PlayerStateManager.numberOfLifes = record.life;
             PlayerData.name = data.name;
             ScoreManager.setScore(record.scoreBeforePlay);

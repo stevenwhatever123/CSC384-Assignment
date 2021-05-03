@@ -1616,13 +1616,14 @@ GameObject:
   - component: {fileID: 190091741}
   - component: {fileID: 190091740}
   - component: {fileID: 190091739}
+  - component: {fileID: 190091744}
   m_Layer: 0
   m_Name: Enemy (2)
   m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &190091739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1645,6 +1646,7 @@ MonoBehaviour:
   scoreWorth: 0
   timeToSpawn: 11
   flee: 0
+  inReplay: 0
 --- !u!50 &190091740
 Rigidbody2D:
   serializedVersion: 4
@@ -1747,6 +1749,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &190091744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190091738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f5daad18412364886aa694ef44eb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!58 &190091745
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4569,13 +4584,27 @@ GameObject:
   - component: {fileID: 564061788}
   - component: {fileID: 564061787}
   - component: {fileID: 564061786}
+  - component: {fileID: 564061785}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &564061785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564061784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f5daad18412364886aa694ef44eb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!114 &564061786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4598,6 +4627,7 @@ MonoBehaviour:
   scoreWorth: 0
   timeToSpawn: 2
   flee: 0
+  inReplay: 0
 --- !u!50 &564061787
 Rigidbody2D:
   serializedVersion: 4
@@ -9606,13 +9636,27 @@ GameObject:
   - component: {fileID: 1026146699}
   - component: {fileID: 1026146698}
   - component: {fileID: 1026146697}
+  - component: {fileID: 1026146696}
   m_Layer: 0
   m_Name: Enemy (3)
   m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &1026146696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026146695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f5daad18412364886aa694ef44eb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!114 &1026146697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9635,6 +9679,7 @@ MonoBehaviour:
   scoreWorth: 0
   timeToSpawn: 21
   flee: 0
+  inReplay: 0
 --- !u!50 &1026146698
 Rigidbody2D:
   serializedVersion: 4
@@ -11426,6 +11471,7 @@ MonoBehaviour:
   scoreWorth: 200
   timeToSpawn: 1
   flee: 0
+  inReplay: 0
 --- !u!50 &1138771737
 Rigidbody2D:
   serializedVersion: 4
@@ -11475,6 +11521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f5daad18412364886aa694ef44eb54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!1001 &1146954735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13775,6 +13822,7 @@ MonoBehaviour:
   moveDirectionX: 0
   moveDirectionY: 0
   movementSpeed: 0.12
+  inReplay: 0
 --- !u!95 &1363368464
 Animator:
   serializedVersion: 3
@@ -17659,6 +17707,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerReplay: {fileID: 1363368465}
   enemyZero: {fileID: 1138771739}
+  enemyOne: {fileID: 564061785}
+  enemyTwo: {fileID: 190091744}
+  enemyThree: {fileID: 1026146696}
 --- !u!4 &1719637596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1641021743284899479, guid: 2de23348a0c759a4c867c4861d1a820c, type: 3}

@@ -65,19 +65,17 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
-        if (!inReplay)
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= timeToSpawn)
         {
-            spawnTimer += Time.deltaTime;
-            if (spawnTimer >= timeToSpawn)
+            timer += Time.deltaTime;
+            if ((timer >= scatterTime && aiState != EnemyState.SEEKPLAYER) && agentMovementManager.IsAllowedToMove())
             {
-                timer += Time.deltaTime;
-                if ((timer >= scatterTime && aiState != EnemyState.SEEKPLAYER) && agentMovementManager.IsAllowedToMove())
-                {
-                    aiState = EnemyState.SEEKPLAYER;
-                    timer = 0;
-                }
-                Tick();
+                aiState = EnemyState.SEEKPLAYER;
+                timer = 0;
             }
+            
+            Tick();
         }
     }
 
@@ -290,18 +288,21 @@ public class EnemyScript : MonoBehaviour
     
     void FollowPath(float movementSpeed)
     {
-        Vector3 tempTargetPosition =
-            new Vector3(path[0].worldPosition.x, path[0].worldPosition.y, 
-                transform.position.z);
+        if (!inReplay)
+        {
+            Vector3 tempTargetPosition =
+                new Vector3(path[0].worldPosition.x, path[0].worldPosition.y, 
+                    transform.position.z);
         
-        //Vector3 direction = (path[0].worldPosition - transform.position).normalized;
-        Vector3 direction = (tempTargetPosition - 
-                             transform.position).normalized;
+            //Vector3 direction = (path[0].worldPosition - transform.position).normalized;
+            Vector3 direction = (tempTargetPosition - 
+                                 transform.position).normalized;
         
-        //Debug.Log("Direction: " + direction);
+            //Debug.Log("Direction: " + direction);
 
-        Vector3 newPosition = transform.position + direction * movementSpeed;
-        rb.MovePosition(newPosition);
+            Vector3 newPosition = transform.position + direction * movementSpeed;
+            rb.MovePosition(newPosition);
+        }
     }
 
     void UpdatePath(Vector3 target)
@@ -312,24 +313,27 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && (!playerStateManager.IsPowerUp() || !flee))
+        if (!inReplay)
         {
-            Debug.Log("GG");
-            playerStateManager.Dead();
-            
-            foreach (GameObject friend in allGhost)
+            if (other.gameObject.CompareTag("Player") && (!playerStateManager.IsPowerUp() || !flee))
             {
-                if (friend.GetInstanceID() == this.GetInstanceID())
+                Debug.Log("GG");
+                playerStateManager.Dead();
+            
+                foreach (GameObject friend in allGhost)
                 {
-                    continue;
+                    if (friend.GetInstanceID() == this.GetInstanceID())
+                    {
+                        continue;
+                    }
+                    friend.GetComponent<EnemyScript>().FriendEaten();
                 }
-                friend.GetComponent<EnemyScript>().FriendEaten();
             }
-        }
 
-        if (other.gameObject.CompareTag("Ghost") && aiState != EnemyState.RETURNTOBASE)
-        {
-            aiState = EnemyState.FINDPATH;
+            if (other.gameObject.CompareTag("Ghost") && aiState != EnemyState.RETURNTOBASE)
+            {
+                aiState = EnemyState.FINDPATH;
+            }
         }
     }
 
