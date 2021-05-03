@@ -19,7 +19,7 @@ public class CoinTriggerHandler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            scoreManager.addScore(scoreWorth);
+            ScoreManager.addScore(scoreWorth);
             Destroy(gameObject);
         }
     }

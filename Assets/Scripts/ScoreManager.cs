@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
         scoreToDisplay.text = getScore().ToString();
     }
 
-    public void addScore(int value)
+    public static void addScore(int value)
     {
         score += value;
     }
@@ -36,5 +36,10 @@ public class ScoreManager : MonoBehaviour
     public static int getScoreBeforePlay()
     {
         return scoreBeforePlaying;
+    }
+
+    public static void setScore(int value)
+    {
+        score = value;
     }
 }

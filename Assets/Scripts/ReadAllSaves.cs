@@ -49,6 +49,10 @@ public class ReadAllSaves : MonoBehaviour
         ColorBlock cb = button.colors;
         cb.selectedColor = Color.yellow;
         button.colors = cb;
+        PlayerSaveData saveFile = buttonObject.AddComponent<PlayerSaveData>();
+        saveFile.AddData(data);
+
+        button.onClick.AddListener(saveFile.OnClick);
 
         GameObject textObject = new GameObject("Text");
         textObject.transform.parent = buttonObject.transform;

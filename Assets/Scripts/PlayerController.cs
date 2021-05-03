@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour
                 enemyController = other.gameObject.GetComponent<EnemyScript>();
                 if (enemyController.isFleeing())
                 {
-                    scoreManager.addScore(other.gameObject.GetComponent<EnemyScript>().scoreWorth * killCounter);
+                    //scoreManager.addScore(other.gameObject.GetComponent<EnemyScript>().scoreWorth * killCounter);
+                    ScoreManager.addScore(other.gameObject.GetComponent<EnemyScript>().scoreWorth * killCounter);
                     killCounter++;
                     enemyController.Eaten();
                 }

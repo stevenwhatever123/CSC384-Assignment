@@ -23,4 +23,9 @@ public class LevelManager : MonoBehaviour
     {
         return currentLevel;
     }
+
+    public static void setCurrentLevel(int i)
+    {
+        currentLevel = i;
+    }
 }

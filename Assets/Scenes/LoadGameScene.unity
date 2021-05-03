@@ -429,7 +429,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Back
 --- !u!222 &573630193
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 1358845091}
   - component: {fileID: 1358845090}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1033,10 +1033,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1358845088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb3696f72c952f4dbda6a4f56eece1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 65d6ba62f3de685479a80389315dce31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 573630192}
+  transitionTime: 1
 --- !u!114 &1358845091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1082,8 +1083,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1358845090}
-        m_TargetAssemblyTypeName: QuitGameHandler, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_TargetAssemblyTypeName: BackButtonHandler, Assembly-CSharp
+        m_MethodName: Back
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
