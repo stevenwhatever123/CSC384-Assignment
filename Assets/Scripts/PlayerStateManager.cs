@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerStateManager : MonoBehaviour
     public GameObject[] allGhosts;
 
     public GameObject gameOverText;
+
+    public GameObject gameOverButton;
     
     public static int numberOfLifes = 0;
 
@@ -38,6 +41,8 @@ public class PlayerStateManager : MonoBehaviour
 
     private float spawnTimer;
 
+    private EventSystem eventSystem;
+
     private void Awake()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -45,6 +50,7 @@ public class PlayerStateManager : MonoBehaviour
         lifeManager = GameObject.Find("GameManager").GetComponent<LifeManager>();
         playerObject = GameObject.Find("Player");
         allGhosts = GameObject.FindGameObjectsWithTag("Ghost");
+        eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 
         if (numberOfLifes == 0)
         {
@@ -114,6 +120,7 @@ public class PlayerStateManager : MonoBehaviour
         if (numberOfLifes < 1)
         {
             gameOverText.SetActive(true);
+            eventSystem.SetSelectedGameObject(gameOverButton);
         }
         else
         {

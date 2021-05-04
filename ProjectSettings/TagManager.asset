@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ghost
   - PlayerNonWalkable
+  - Coin
+  - Shock
   layers:
   - Default
   - TransparentFX

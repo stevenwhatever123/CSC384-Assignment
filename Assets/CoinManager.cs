@@ -29,9 +29,9 @@ public class CoinManager : MonoBehaviour
             {
                 LevelManager.levelUp();
                 SaveSystem.SaveReplay(player, ScoreManager.getScore());
-                SaveSystem.SavePlayer(player, ScoreManager.getScore());
+                SaveSystem.SavePlayerAfterComplete(player, ScoreManager.getScore());
                 inReplayMode = true;
-                SceneManager.LoadScene("ReplayScene", LoadSceneMode.Single);
+                SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
             }
         }
         //Debug.Log("Count: " + numOfCollectables);

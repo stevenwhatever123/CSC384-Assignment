@@ -260,6 +260,10 @@ public class EnemyScript : MonoBehaviour
             {
                 foreach (GameObject friend in allGhost)
                 {
+                    if (friend == null)
+                    {
+                        continue;
+                    }
                     friend.GetComponent<Collider2D>().enabled = false;
                 }
                 

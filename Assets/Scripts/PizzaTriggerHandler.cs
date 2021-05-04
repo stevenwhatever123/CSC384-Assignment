@@ -1,26 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class CoinTriggerHandler : MonoBehaviour
+public class PizzaTriggerHandler : MonoBehaviour
 {
     [SerializeField] private int scoreWorth = 10;
 
-    public ScoreManager scoreManager;
-
-    void Awake()
-    {
-        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
-    }
+    public ShockWave Shock;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player")
-        || other.gameObject.CompareTag("Shock"))
+        if (other.gameObject.CompareTag("Player"))
         {
             ScoreManager.addScore(scoreWorth);
+            Shock.setWaveActive(true);
             Destroy(gameObject);
         }
     }
