@@ -39,6 +39,7 @@ public class StartGameHandler : MonoBehaviour
             alertText.color = new Color(1, 0, 0, 0);
             alertText.enabled = false;
             playerData.SetName(inputField.text);
+            TutorialManager.firstTimePlaying = true;
             StartCoroutine(Transition());
             Debug.Log("Start Game");
         }

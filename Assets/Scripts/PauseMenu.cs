@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenu;
 
+    public GameObject tutorialPanel;
+
     public void Tab()
     {
         if (IsPaused)
@@ -25,6 +27,10 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
+        if (TutorialManager.firstTimePlaying)
+        {
+            tutorialPanel.SetActive(true); 
+        }
     }
 
     public void Pause()
@@ -32,5 +38,9 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         IsPaused = true;
+        if (TutorialManager.firstTimePlaying)
+        {
+            tutorialPanel.SetActive(false); 
+        }
     }
 }
