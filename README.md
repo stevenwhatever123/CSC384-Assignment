@@ -6,6 +6,7 @@ In this coursework, I implemented Pac-Man with several additional features, whic
 - A launch menu  
 - A profile system  
 - A replay system  
+- A leaderboard feature
 - A tutorial  
 - An extra feature of the game with explosive collectables  
   
