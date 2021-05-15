@@ -8,3 +8,6 @@ In this coursework, I implemented Pac-Man with several additional features, whic
 - A replay system  
 - A tutorial  
 - An extra feature of the game with explosive collectables  
+  
+The game can be downloaded here:  
+https://drive.google.com/file/d/1OaVE7xrccLsZRHuUwkX8ZcXrK9UZXRNk/view?usp=sharing
