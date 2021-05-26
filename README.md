@@ -1,7 +1,7 @@
 # CSC384-Assignment
 This is my attempt on CSC384-Introduction to Video Games Programming Assignment  
 
-This module is 100% assignment based where my result is mostly based on the assignment I handed in.  
+This module is 100% assignment based where my result depends on the assignment I handed in.  
 I scored 75/100 in the implementation part and scored 12/40 in the design pattern questions part.  
 In which, I only have 57% marks in this module.  
 
