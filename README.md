@@ -15,7 +15,7 @@ In this coursework, I implemented Pac-Man with several additional features, whic
 - An extra feature of the game with explosive collectables  
   
 The game can be downloaded here:  
-https://drive.google.com/file/d/1OaVE7xrccLsZRHuUwkX8ZcXrK9UZXRNk/view?usp=sharing  
+https://giantgummybear.itch.io/pac-man
 
 The following video is what I submitted to the university to demonstrate my game.  
 https://youtu.be/7WhR0CRPDoM
